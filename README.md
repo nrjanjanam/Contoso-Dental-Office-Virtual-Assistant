@@ -6,8 +6,7 @@ Alice is a customer support chatbot that lives on a dentist website. It is power
 
 The following video gives a glimpse of the Contoso Dental Website powered with AI Chatbot :
 
-
-
+https://user-images.githubusercontent.com/35861270/177042994-791c25b6-1719-484b-9fe5-b6cf4b8aa0dc.mp4
 
 ## Getting Started
 
