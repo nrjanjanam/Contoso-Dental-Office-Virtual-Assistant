@@ -36,7 +36,8 @@ class IntentRecognizer {
 
         // const datetime = timex[0]
         // return datetime;
-        const timeEntity = result.entities.time;
+        console.log(result.luisResult.prediction.entities.time);
+        const timeEntity = result.luisResult.prediction.entities.time;
 
         return timeEntity;
     }

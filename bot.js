@@ -4,6 +4,7 @@
 const { ActivityHandler, MessageFactory } = require('botbuilder');
 
 const { QnAMaker } = require('botbuilder-ai');
+const { stringify } = require('json5');
 const DentistScheduler = require('./dentistscheduler');
 const IntentRecognizer = require("./intentrecognizer")
 
@@ -24,28 +25,41 @@ class DentaBot extends ActivityHandler {
 
         this.onMessage(async (context, next) => {
             // send user input to QnA Maker and collect the response in a variable
-            // don't forget to use the 'await' keyword
-          
-            // send user input to IntentRecognizer and collect the response in a variable
-            // don't forget 'await'
-                     
-            // determine which service to respond with based on the results from LUIS //
+            try{
+                const qnaResult = await this.QnAMaker.getAnswers(context);
+                const luisResult = await this.IntentRecognizer.executeLuisQuery(context);
+                const topIntent = luisResult.luisResult.prediction.topIntent;
 
-            // if(top intent is intentA and confidence greater than 50){
-            //  doSomething();
-            //  await context.sendActivity();
-            //  await next();
-            //  return;
-            // }
-            // else {...}
+                let message;
+
+                if(luisResult.intents[topIntent].score >= 0.65){
+                    if(topIntent === 'getAvailability'){
+                        message = await this.DentistScheduler.getAvailability(this.IntentRecognizer.getTimeEntity(luisResult));
+                    }
+                    else if(topIntent === 'scheduleAppointment'){
+                        message = await this.DentistScheduler.scheduleAppointment(this.IntentRecognizer.getTimeEntity(luisResult));
+                    }
+                    else{
+                        message = 'Kindly rephrase your question, I am unable to help you out.';
+                    }
+                }
+                else if(qnaResult[0] != undefined){
+                    message = qnaResult[0].answer;
+                } else {
+                    message = 'Kindly rephrase your question, I am unable to help you out.';
+                }    
              
-            await next();
+            await context.sendActivity(MessageFactory.text(message, message));
+        }catch(e){
+            console.log("Error Occured:", e);
+        }
+        await next();
     });
 
         this.onMembersAdded(async (context, next) => {
         const membersAdded = context.activity.membersAdded;
         //write a custom greeting
-        const welcomeText = '';
+        const welcomeText = 'Welcome to Contoso Dental Clinic. I am Alicia at your service. You can use my help to solve any FAQs or book an appointment.';
         for (let cnt = 0; cnt < membersAdded.length; ++cnt) {
             if (membersAdded[cnt].id !== context.activity.recipient.id) {
                 await context.sendActivity(MessageFactory.text(welcomeText, welcomeText));
