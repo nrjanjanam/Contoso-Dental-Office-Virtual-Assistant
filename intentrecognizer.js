@@ -28,15 +28,7 @@ class IntentRecognizer {
 
  
     getTimeEntity(result) {
-        // const datetimeEntity = result.entities.datetime;
-        // if (!datetimeEntity || !datetimeEntity[0]) return undefined;
-
-        // const timex = datetimeEntity[0].timex;
-        // if (!timex || !timex[0]) return undefined;
-
-        // const datetime = timex[0]
-        // return datetime;
-        console.log(result.luisResult.prediction.entities.time);
+        console.log(`Time is ${result.luisResult.prediction.entities.time}`);
         const timeEntity = result.luisResult.prediction.entities.time;
 
         return timeEntity;
