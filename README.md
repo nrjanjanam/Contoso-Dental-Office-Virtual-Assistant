@@ -1,55 +1,32 @@
-# README Template
+# ALICE - Contoso Dental Office Virtual Assistant
 
-Below is a template provided for use when building your README file for students.
+Alice is a customer support chatbot that lives on a dentist website. It is powered with Azure QnA Maker and LUIS to answer patient questions and help them schedule appointments. It is also capable of having normal professional converations with patients.
 
-# Project Title
+## Demo
 
-Project description goes here.
+The following video gives a glimpse of the Contoso Dental Website powered with AI Chatbot :
+
+https://user-images.githubusercontent.com/35861270/177042994-791c25b6-1719-484b-9fe5-b6cf4b8aa0dc.mp4
 
 ## Getting Started
 
-Instructions for how to get a copy of the project running on your local machine.
+To get this project up and running on your local system, you need an Active Azure subscription. Technical knowledge of NodeJS, REST API's as well as Natural Language Process and Conversational AI is also necessary.
 
 ### Dependencies
 
-```
-Examples here
-```
+
 
 ### Installation
 
-Step by step explanation of how to get a dev environment running.
-
-List out the steps
-
-```
-Give an example here
-```
-
-## Testing
-
-Explain the steps needed to run any automated tests
-
-### Break Down Tests
-
-Explain what each test does and why
-
-```
-Examples here
-```
-
-## Project Instructions
-
-This section should contain all the student deliverables for this project.
+The following needs to be configured on your local system -
+1. Download and install [Visual Studio Code](https://code.visualstudio.com/download) as a coding platform and version controls software
+2. Download and install [NodeJS](https://nodejs.org/en/)
+3. Download and install the [Bot Framework Emulator](https://github.com/Microsoft/BotFramework-Emulator/releases/tag/v4.13.0) for debugging the code
 
 ## Built With
 
-* [Item1](www.item1.com) - Description of item
-* [Item2](www.item2.com) - Description of item
-* [Item3](www.item3.com) - Description of item
+* Azure Bot
+* Azure Language Servcies - QnA Maker and Language Understanding (LUIS)
+* Azure Web Services 
+* Setup of CI/CD pipeline on GitHub on Azure Web Apps
 
-Include all items used to build project.
-
-## License
-
-[License](LICENSE.txt)
